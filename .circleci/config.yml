@@ -7,9 +7,7 @@ jobs:
     steps:
       - setup_remote_docker
       - checkout
-      - docker/check
-      - run: |
-          echo "$DOCKERHUB_PASSWORD" | docker login --username $DOCKERHUB_LOGIN --password-stdin
+      - run: 'docker login -u $DOCKERHUB_LOGIN -p $DOCKERHUB_PASSWORD'
       - run: docker build -t api-feed ./udagram-api-feed
       - run: docker push api-feed
 workflows:
