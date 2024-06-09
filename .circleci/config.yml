@@ -5,14 +5,11 @@ jobs:
   build-and-push:
     executor: docker/docker
     steps:
-      - setup_remote_docker
       - checkout
-      - docker/check
-      - docker/build:
-          image: docker build -t api-feed ./udagram-api-feed :nguyenhoangvu1996/api_feed
-      - docker/push:
-          command: 'echo "$DOCKERHUB_PASSWORD" | docker login -u "$DOCKERHUB_LOGIN" --password-stdin'
-          image: nguyenhoangvu1996/api_feed
+      - run: |
+          echo "$DOCKERHUB_PASSWORD" | docker login --username $DOCKERHUB_LOGIN --password-stdin
+      - run: docker build -t api-feed ./udagram-api-feed :nguyenhoangvu1996/api_feed
+      - run: docker push nguyenhoangvu1996/api_feed
 workflows:
   commit:
     jobs:
