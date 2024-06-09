@@ -8,8 +8,8 @@ jobs:
       - setup_remote_docker
       - checkout
       - run: 'docker login -u $DOCKERHUB_LOGIN -p $DOCKERHUB_PASSWORD'
-      - run: docker build -t api-feed ./udagram-api-feed
-      - run: docker push api-feed
+      - run: docker build -t api-feed ./udagram-api-feed :nguyenhoangvu1996/api_feed
+      - run: docker push nguyenhoangvu1996/api_feed
 workflows:
   commit:
     jobs:
