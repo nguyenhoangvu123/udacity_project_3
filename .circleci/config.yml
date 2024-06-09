@@ -5,8 +5,6 @@ workflows:
   jobs:
     build-and-push-image-api-feed:
       steps:
-        - setup_remote_docker
-        - checkout
         -docker/check :
           docker-username: $DOCKER_USER
           docker-password: $DOCKER_PASSWORD
