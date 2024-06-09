@@ -2,24 +2,24 @@ version: 2.1
 orbs:
   docker: circleci/docker@2.6.0
 jobs:
-  build-and-push-image-api-feed:
-    executor: docker/docker
-    steps:
-      - setup_remote_docker
-      - checkout
-      - run: 'docker login -u $DOCKERHUB_LOGIN -p $DOCKERHUB_PASSWORD'
-      - run: docker build -t api-feed ./udagram-api-feed
-      - run: docker tag api-feed nguyenhoangvu1996/api_feed
-      - run: docker push nguyenhoangvu1996/api_feed
-  build-and-push-image-api-user:
-    executor: docker/docker
-    steps:
-      - setup_remote_docker
-      - checkout
-      - run: 'docker login -u $DOCKERHUB_LOGIN -p $DOCKERHUB_PASSWORD'
-      - run: docker build -t api-user ./udagram-api-user
-      - run: docker tag api-user nguyenhoangvu1996/api_user
-      - run: docker push nguyenhoangvu1996/api_user
+  # build-and-push-image-api-feed:
+  #   executor: docker/docker
+  #   steps:
+  #     - setup_remote_docker
+  #     - checkout
+  #     - run: 'docker login -u $DOCKERHUB_LOGIN -p $DOCKERHUB_PASSWORD'
+  #     - run: docker build -t api-feed ./udagram-api-feed
+  #     - run: docker tag api-feed nguyenhoangvu1996/api_feed
+  #     - run: docker push nguyenhoangvu1996/api_feed
+  # build-and-push-image-api-user:
+  #   executor: docker/docker
+  #   steps:
+  #     - setup_remote_docker
+  #     - checkout
+  #     - run: 'docker login -u $DOCKERHUB_LOGIN -p $DOCKERHUB_PASSWORD'
+  #     - run: docker build -t api-user ./udagram-api-user
+  #     - run: docker tag api-user nguyenhoangvu1996/api_user
+  #     - run: docker push nguyenhoangvu1996/api_user
   build-and-push-image-api-frontend:
     executor: docker/docker
     steps:
@@ -29,19 +29,19 @@ jobs:
       - run: docker build -t frontend ./udagram-frontend
       - run: docker tag frontend nguyenhoangvu1996/frontend
       - run: docker push nguyenhoangvu1996/frontend
-  build-and-push-image-api-reverseproxy:
-    executor: docker/docker
-    steps:
-      - setup_remote_docker
-      - checkout
-      - run: 'docker login -u $DOCKERHUB_LOGIN -p $DOCKERHUB_PASSWORD'
-      - run: docker build -t reverseproxy ./udagram-reverseproxy
-      - run: docker tag reverseproxy nguyenhoangvu1996/reverseproxy
-      - run: docker push nguyenhoangvu1996/reverseproxy
+  # build-and-push-image-api-reverseproxy:
+  #   executor: docker/docker
+  #   steps:
+  #     - setup_remote_docker
+  #     - checkout
+  #     - run: 'docker login -u $DOCKERHUB_LOGIN -p $DOCKERHUB_PASSWORD'
+  #     - run: docker build -t reverseproxy ./udagram-reverseproxy
+  #     - run: docker tag reverseproxy nguyenhoangvu1996/reverseproxy
+  #     - run: docker push nguyenhoangvu1996/reverseproxy
 workflows:
   commit:
     jobs:
-      - build-and-push-image-api-feed
-      - build-and-push-image-api-user
+      # - build-and-push-image-api-feed
+      # - build-and-push-image-api-user
       - build-and-push-image-api-frontend
-      - build-and-push-image-api-reverseproxy
+      # - build-and-push-image-api-reverseproxy
