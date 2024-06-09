@@ -17,7 +17,7 @@ jobs:
           image: nguyenhoangvu1996/api_feed
       - run:
           command: |
-            echo "$DOCKER_PASSWORD $DOCKER_USERNAME"
+            echo "image api-feed successs"
 workflows:
   commit:
     jobs:
