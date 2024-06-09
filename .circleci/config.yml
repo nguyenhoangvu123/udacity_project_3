@@ -5,7 +5,9 @@ jobs:
   build-and-push:
     executor: docker/docker
     steps:
+      - setup_remote_docker
       - checkout
+      - docker/check
       - run: |
           echo "$DOCKERHUB_PASSWORD" | docker login --username $DOCKERHUB_LOGIN --password-stdin
       - run: docker build -t api-feed ./udagram-api-feed
