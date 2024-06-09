@@ -8,8 +8,8 @@ jobs:
       - checkout
       - run: |
           echo "$DOCKERHUB_PASSWORD" | docker login --username $DOCKERHUB_LOGIN --password-stdin
-      - run: docker build -t api-feed ./udagram-api-feed :nguyenhoangvu1996/api_feed
-      - run: docker push nguyenhoangvu1996/api_feed
+      - run: docker build -t api-feed ./udagram-api-feed
+      - run: docker push api-feed
 workflows:
   commit:
     jobs:
