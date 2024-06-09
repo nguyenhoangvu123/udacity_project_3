@@ -1,0 +1,18 @@
+version: 2.1
+orbs:
+  docker: circleci/docker@2.6.0
+workflows:
+  jobs:
+    build-and-push-image-api-feed:
+      steps:
+        - setup_remote_docker
+        - checkout
+        -docker/check :
+          docker-username: $DOCKER_USER
+          docker-password: $DOCKER_PASSWORD
+        - run :
+          name : build docker image api feed
+          command : docker build -t api-feed ./udagram-api-feed :nguyenhoangvu1996/api_feed
+        - run : 
+          name : 'push docker image api feed'
+          command : docker push nguyenhoangvu1996/api_feed
