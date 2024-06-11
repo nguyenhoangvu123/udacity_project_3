@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontend
+  labels:
+    udagram-app: frontend
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      udagram-app: frontend
+  template:
+    metadata:
+      labels:
+        udagram-app: frontend
+    spec:
+      containers:
+      - name: frontend
+        image: nguyenhoangvu1996/frontend
+        ports:
+        - containerPort: 8100
