@@ -1,0 +1,82 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend-feed
+  labels:
+    app: backend-feed
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: backend-feed
+  template:
+    metadata:
+      labels:
+        app: backend-feed
+    spec:
+      containers:
+      - image: nguyenhoangvu1996/api_feed
+        name: backend-feed
+        imagePullPolicy: Always  
+        resources:
+          requests:
+            memory: "64Mi"
+            cpu: "250m"
+          limits:
+            memory: "1024Mi"
+            cpu: "500m"                  
+        env:
+        - name: URL
+          valueFrom:
+            secretKeyRef:
+              name: aws-secret
+              key: url
+        - name: AWS_BUCKET
+          valueFrom:
+            secretKeyRef:
+              name: aws-secret
+              key: aws-bucket
+        - name: AWS_PROFILE
+          valueFrom:
+            secretKeyRef:
+              name: aws-secret
+              key: aws-profile
+        - name: AWS_REGION
+          valueFrom:
+            secretKeyRef:
+              name: aws-secret
+              key: aws-region
+        - name: JWT_SECRET
+          valueFrom:
+            secretKeyRef:
+              name: aws-secret
+              key: jwt-secret
+        - name: POSTGRESS_DB
+          valueFrom:
+            secretKeyRef:
+              name: aws-secret
+              key: postgres-db
+        - name: POSTGRESS_HOST
+          valueFrom:
+            secretKeyRef:
+              name: aws-secret
+              key: postgres-host
+        - name: POSTGRESS_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: aws-secret
+              key: postgres-password
+        - name: POSTGRESS_USERNAME
+          valueFrom:
+            secretKeyRef:
+              name: aws-secret
+              key: postgres-username      
+        volumeMounts:
+        - name: aws-secret
+          mountPath: "/root/.aws/"
+          readOnly: true        
+      restartPolicy: Always
+      volumes:
+      - name: aws-secret
+        secret:
+          secretName: aws-secret
